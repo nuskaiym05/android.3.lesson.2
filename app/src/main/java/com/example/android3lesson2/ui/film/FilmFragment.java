@@ -1,23 +1,21 @@
 package com.example.android3lesson2.ui.film;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.example.android3lesson2.R;
+import com.example.android3lesson2.data.model.FilmModel;
+import com.example.android3lesson2.data.network.FilmRepository;
 import com.example.android3lesson2.databinding.FragmentFilmBinding;
-import com.example.android3lesson2.model.FilmModel;
-import com.example.android3lesson2.network.FilmRepository;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +27,7 @@ public class FilmFragment extends Fragment implements FilmAdapter.OnClickFilmAda
     public static final String ID = "id";
     protected FragmentFilmBinding binding;
     protected FilmAdapter adapter;
+    protected NavController navController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,11 +43,14 @@ public class FilmFragment extends Fragment implements FilmAdapter.OnClickFilmAda
 
         init();
         getFilm();
+        setupListener();
     }
 
     private void init() {
         adapter = new FilmAdapter(this);
         binding.recyclerView.setAdapter(adapter);
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+
     }
 
     private void getFilm() {
@@ -64,12 +66,24 @@ public class FilmFragment extends Fragment implements FilmAdapter.OnClickFilmAda
         });
     }
 
+    private void setupListener() {
+        binding.btnSavedFragmentFilm.setOnClickListener(v ->
+                navController.navigate(R.id.action_mainFragment_to_savedFragment)
+        );
+    }
+
     @Override
-    public void onClick(String id) {
-        NavController navController = ((NavHostFragment) requireActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)).getNavController();
+    public void onClickSend(String id) {
         Bundle bundle = new Bundle();
         bundle.putString(ID, id);
         setArguments(bundle);
-        navController.navigate(R.id.descriptionFragment, bundle);
+        navController.navigate(R.id.action_mainFragment_to_descriptionFragment, bundle);
+    }
+
+    @Override
+    public void onClickSave(FilmModel model) {
+
+        FilmRepository.insertFilm(model);
+        Toast.makeText(requireContext(), "Фильм сохранился!", Toast.LENGTH_SHORT).show();
     }
 }

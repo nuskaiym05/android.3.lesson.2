@@ -1,6 +1,7 @@
-package com.example.android3lesson2.network;
+package com.example.android3lesson2.data.network;
 
-import com.example.android3lesson2.model.FilmModel;
+import com.example.android3lesson2.App;
+import com.example.android3lesson2.data.model.FilmModel;
 
 import java.util.List;
 
@@ -45,6 +46,14 @@ public class FilmRepository {
                 callback.onFailure(t.getMessage());
             }
         });
+    }
+
+    public static void insertFilm(FilmModel model) {
+        App.getInstance().getDataBase().filmDao().insertFilms(model);
+    }
+
+    public static List<FilmModel> getFilmsFromRoom() {
+        return App.getInstance().getDataBase().filmDao().getFilms();
     }
 
     public interface FilmCallback {

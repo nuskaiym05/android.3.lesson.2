@@ -13,10 +13,22 @@
         <action
             android:id="@+id/action_mainFragment_to_descriptionFragment"
             app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.android3lesson2.ui.DescriptionFragment"
         android:label="fragment_description"
         tools:layout="@layout/fragment_description" />
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.example.android3lesson2.ui.saved.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved" >
+        <action
+            android:id="@+id/action_savedFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+    </fragment>
 </navigation>

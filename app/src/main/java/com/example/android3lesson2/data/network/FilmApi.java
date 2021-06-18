@@ -1,7 +1,7 @@
-package com.example.android3lesson2.network;
+package com.example.android3lesson2.data.network;
 
 
-import com.example.android3lesson2.model.FilmModel;
+import com.example.android3lesson2.data.model.FilmModel;
 
 import java.util.List;
 

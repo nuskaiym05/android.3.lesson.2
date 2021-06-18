@@ -1,56 +1,92 @@
-package com.example.android3lesson2.model;
+package com.example.android3lesson2.data.model;
 
-import android.text.Editable;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class FilmModel{
+@Entity(tableName = "filmModel")
+public class FilmModel implements Serializable {
 
+    @NonNull
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private String id;
+
+    @ColumnInfo(name = "title")
     @SerializedName("title")
     @Expose
     private String title;
+
+    @ColumnInfo(name = "original_title")
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
+
+    @ColumnInfo(name = "original_title_romanised")
     @SerializedName("original_title_romanised")
     @Expose
     private String originalTitleRomanised;
+
+    @ColumnInfo(name = "description")
     @SerializedName("description")
     @Expose
     private String description;
+
+    @ColumnInfo(name = "director")
     @SerializedName("director")
     @Expose
     private String director;
+
+    @ColumnInfo(name = "producer")
     @SerializedName("producer")
     @Expose
     private String producer;
+
+    @ColumnInfo(name = "release_date")
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
+
+    @ColumnInfo(name = "running_time")
     @SerializedName("running_time")
     @Expose
     private String runningTime;
+
+    @ColumnInfo(name = "rt_score")
     @SerializedName("rt_score")
     @Expose
     private String rtScore;
+
+    @Ignore
     @SerializedName("people")
     @Expose
     private List<String> people = null;
+
+    @Ignore
     @SerializedName("species")
     @Expose
     private List<String> species = null;
+
+    @Ignore
     @SerializedName("locations")
     @Expose
     private List<String> locations = null;
+
+    @Ignore
     @SerializedName("vehicles")
     @Expose
     private List<String> vehicles = null;
+
+    @ColumnInfo(name = "url")
     @SerializedName("url")
     @Expose
     private String url;

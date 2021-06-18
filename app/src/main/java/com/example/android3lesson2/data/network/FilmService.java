@@ -1,4 +1,4 @@
-package com.example.android3lesson2.network;
+package com.example.android3lesson2.data.network;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
